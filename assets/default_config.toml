@@ -1,0 +1,159 @@
+# rusty-broom — default configuration.
+#
+# Copy it to your own config with `rusty-broom config init` and edit freely.
+# User `[[project_types]]` with a name that already exists here replace the
+# built-in entry; new names are appended (see `settings.extend_default_types`).
+
+[settings]
+# Age threshold used when --older-than is not given. Accepts s/m/h/d/w/mo/y,
+# possibly combined ("1y6mo"). A bare number means days. "0" disables the filter.
+older_than = "30d"
+
+# How deep to descend from every root while looking for projects.
+max_depth = 8
+
+# Stop descending once a directory is recognised as a project. Turn this off to
+# also report nested projects (workspace members, monorepo packages).
+descend_into_projects = false
+
+# Skip directories whose name starts with a dot (below the root itself).
+skip_hidden = true
+
+# Never enter these directories while searching for projects.
+prune_dirs = [
+    ".git", ".hg", ".svn", ".jj",
+    "node_modules", ".venv", "venv", ".tox", "__pycache__",
+    ".gradle", ".terraform", "Pods", ".stack-work",
+    "zig-cache", ".zig-cache", "DerivedData",
+    ".Trash", "Library", "Applications",
+]
+
+# Only ever delete paths that git itself considers ignored (`git check-ignore`).
+# This is the main safety net: anything tracked or merely untracked is kept.
+# Projects outside a git work tree keep all matched artifacts and are marked
+# "no-git" in the UI.
+require_git_ignored = true
+
+# Size/clean worker threads. 0 = derive from the number of CPUs.
+workers = 0
+
+# ---------------------------------------------------------------------------
+# Project types
+#
+#   markers   — a project is recognised when one of these exists (all of them
+#               if `require_all_markers = true`). Globs and `a/b` paths work.
+#   artifacts — what may be deleted, relative to the project root. Supports
+#               `*`, `?`, and `**` (any depth).
+# ---------------------------------------------------------------------------
+
+[[project_types]]
+name = "rust"
+markers = ["Cargo.toml"]
+artifacts = ["target"]
+
+[[project_types]]
+name = "node"
+markers = ["package.json", "pnpm-workspace.yaml", "deno.json"]
+artifacts = [
+    "node_modules", "dist", "build", "out", "coverage",
+    ".next", ".nuxt", ".output", ".turbo", ".parcel-cache",
+    ".svelte-kit", ".angular", ".vite", ".astro", ".docusaurus",
+    "*/node_modules", "*/*/node_modules",
+    "*/dist", "*/build",
+]
+
+[[project_types]]
+name = "python"
+markers = ["pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", "poetry.lock"]
+artifacts = [
+    "**/__pycache__", ".venv", "venv", ".tox", ".nox",
+    ".mypy_cache", ".pytest_cache", ".ruff_cache", ".ipynb_checkpoints",
+    "build", "dist", "*.egg-info", "htmlcov",
+]
+
+[[project_types]]
+name = "maven"
+markers = ["pom.xml"]
+artifacts = ["target", "*/target", "*/*/target"]
+
+[[project_types]]
+name = "gradle"
+markers = ["build.gradle", "build.gradle.kts", "settings.gradle", "settings.gradle.kts"]
+artifacts = ["build", ".gradle", ".kotlin", "*/build", "*/.gradle", "*/*/build"]
+
+[[project_types]]
+name = "sbt"
+markers = ["build.sbt"]
+artifacts = ["target", "project/target", "project/project", "*/target"]
+
+[[project_types]]
+name = "dotnet"
+markers = ["*.sln", "*.csproj", "*.fsproj", "*.vbproj"]
+artifacts = ["bin", "obj", "**/bin", "**/obj", "packages"]
+
+[[project_types]]
+name = "go"
+markers = ["go.mod"]
+artifacts = ["bin", "vendor", "dist"]
+
+[[project_types]]
+name = "cmake"
+markers = ["CMakeLists.txt"]
+artifacts = ["build", "out", "cmake-build-*", "_build"]
+
+[[project_types]]
+name = "swift"
+markers = ["Package.swift", "*.xcodeproj", "*.xcworkspace"]
+artifacts = [".build", "build", "DerivedData", ".swiftpm"]
+
+[[project_types]]
+name = "cocoapods"
+markers = ["Podfile"]
+artifacts = ["Pods"]
+
+[[project_types]]
+name = "elixir"
+markers = ["mix.exs"]
+artifacts = ["_build", "deps", "cover"]
+
+[[project_types]]
+name = "dart"
+markers = ["pubspec.yaml"]
+artifacts = ["build", ".dart_tool", ".flutter-plugins-dependencies"]
+
+[[project_types]]
+name = "php"
+markers = ["composer.json"]
+artifacts = ["vendor", "var/cache", "var/log"]
+
+[[project_types]]
+name = "ruby"
+markers = ["Gemfile", "*.gemspec"]
+artifacts = ["vendor/bundle", ".bundle", "tmp", "coverage", "pkg"]
+
+[[project_types]]
+name = "haskell"
+markers = ["stack.yaml", "*.cabal"]
+artifacts = [".stack-work", "dist-newstyle", "dist"]
+
+[[project_types]]
+name = "zig"
+markers = ["build.zig"]
+artifacts = ["zig-out", "zig-cache", ".zig-cache"]
+
+[[project_types]]
+name = "terraform"
+markers = ["*.tf"]
+artifacts = [".terraform"]
+
+[[project_types]]
+name = "unity"
+markers = ["Assets", "ProjectSettings"]
+require_all_markers = true
+artifacts = ["Library", "Temp", "Obj", "Build", "Logs", "UserSettings"]
+
+[[project_types]]
+name = "latex"
+markers = ["*.tex"]
+artifacts = ["*.aux", "*.bbl", "*.blg", "*.fdb_latexmk", "*.fls", "*.synctex.gz", "*.toc", "_minted-*"]
+enabled = false
