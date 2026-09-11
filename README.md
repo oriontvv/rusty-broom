@@ -16,6 +16,10 @@ The primary metric is how recently the project was modified. The age is calculat
 
 The tool only deletes paths that Git itself considers ignored (`git check-ignore`). Committed `dist/` or `vendor/` directories will remain untouched, even if they are listed in the configuration file. Projects outside of a Git repository are labeled as `no-git`, and their artifacts are not verified—this is indicated in both the report and the user interface.
 
+## Installation
+* `cargo install rusty-broom`
+* or download latest [build](https://github.com/oriontvv/rusty-broom/releases)
+
 ## Building
 
 ```sh
