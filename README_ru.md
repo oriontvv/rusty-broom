@@ -1,4 +1,7 @@
 # rusty-broom
+
+[![Actions Status](https://github.com/oriontvv/rusty-broom/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/oriontvv/rusty-broom/actions/workflows/ci.yml) [![Coverage badge](https://raw.githubusercontent.com/oriontvv/rusty-broom/coverage/htmlcov/badges/flat.svg)](https://htmlpreview.github.io/?https://github.com/oriontvv/rusty-broom/coverage/htmlcov/index.html) [![dependency status](https://deps.rs/repo/github/oriontvv/rusty-broom/status.svg)](https://deps.rs/repo/github/oriontvv/rusty-broom) [![Crates.io](https://img.shields.io/crates/v/rusty-broom.svg)](https://crates.io/crates/rusty-broom)
+
 <p align="center">
   <img src="assets/img/logo.webp" alt="Logo">
 </p>

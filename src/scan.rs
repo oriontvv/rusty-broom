@@ -260,7 +260,7 @@ mod tests {
         let dir = std::env::temp_dir().join(format!("rb-scan-{tag}-{}", std::process::id()));
         let _ = fs::remove_dir_all(&dir);
         fs::create_dir_all(&dir).unwrap();
-        dir
+        dir.canonicalize().unwrap()
     }
 
     fn options(root: &Path) -> ScanOptions {
