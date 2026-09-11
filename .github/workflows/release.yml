@@ -1,0 +1,106 @@
+
+name: Release
+
+on:
+  push:
+    tags:
+      - '*.*.*'
+
+jobs:
+  release-crates:
+    needs: release-github
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: publish package to crates
+        run: |
+          cargo package
+          cargo publish --token ${{ secrets.CARGO_TOKEN }}
+
+  release-github:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    
+    steps:
+    - uses: actions/checkout@v7
+
+    - name: Get version
+      id: get_version
+      run: echo ::set-output name=version::${GITHUB_REF/refs\/tags\//}
+
+    - name: Install Rust
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: stable
+        profile: minimal
+        components: clippy
+
+    - name: New Resolver
+      run: |
+        cargo install cargo-modify --force
+        cargo modify new-resolver
+    - name: Build
+      run: cargo build
+    - name: Run tests
+      run: make test
+    - name: Run clippy
+      run: |
+        cargo clean
+        make clippy
+    - name: Setup MUSL
+      if: matrix.os == 'ubuntu-latest'
+      run: |
+        rustup target add x86_64-unknown-linux-musl
+        sudo apt-get -qq install musl-tools
+    - name: Build Release Mac
+      if: matrix.os == 'macos-latest'
+      run: make release-mac
+    - name: Build Release Linux
+      if: matrix.os == 'ubuntu-latest'
+      run: make release-linux-musl
+    - name: Build Release Win
+      if: matrix.os == 'windows-latest'
+      run: make release-win
+
+    - name: Set SHA
+      if: matrix.os == 'macos-latest'
+      id: shasum
+      run: |
+        echo ::set-output name=sha::"$(shasum -a 256 ./release/rusty-broom-mac.tar.gz | awk '{printf $1}')"
+    - name: Extract release notes
+      if: matrix.os == 'ubuntu-latest'
+      id: release_notes
+      uses: ffurrer2/extract-release-notes@v3
+    - name: Release
+      uses: softprops/action-gh-release@v3
+      with:
+        body: ${{ steps.release_notes.outputs.release_notes }}
+        prerelease: ${{ contains(github.ref, '-') }}
+        files: |
+          ./release/*.tar.gz
+          ./release/*.zip
+          ./release/*.msi
+          
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    # - name: Bump personal tap formula
+    #   uses: mislav/bump-homebrew-formula-action@v1
+    #   if: "matrix.os == 'macos-latest' && !contains(github.ref, '-')" # skip prereleases
+    #   env:
+    #     COMMITTER_TOKEN: ${{ secrets.BREW_TOKEN }}
+    #   with:
+    #     formula-name: rusty-broom
+    #     homebrew-tap: oriontvv/tap
+    #     download-url: https://github.com/oriontvv/rusty-broom/releases/download/${{ steps.get_version.outputs.version }}/rusty-broom-mac.tar.gz
+
+    # - name: Bump homebrew-core formula
+    #   uses: mislav/bump-homebrew-formula-action@v1
+    #   if: "matrix.os == 'macos-latest' && !contains(github.ref, '-')" # skip prereleases
+    #   env:
+    #     COMMITTER_TOKEN: ${{ secrets.BREW_TOKEN }}
+    #   with:
+    #     formula-name: rusty-broom

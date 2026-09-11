@@ -1,7 +1,14 @@
 # rusty-broom
+<p align="center">
+  <img src="assets/img/logo.webp" alt="Logo">
+</p>
 
 Освобождает диск от сборочного мусора в проектах, которыми вы давно не занимались:
 `target`, `node_modules`, `.venv`, `build`, `Pods` и так далее.
+
+<p align="center">
+  <img src="assets/img/usage.webp" alt="Logo">
+</p>
 
 Основной критерий — как давно проект трогали. Возраст считается по времени
 изменения **собственных файлов проекта**: артефакты, `.git` и служебные каталоги

@@ -1,6 +1,13 @@
 # rusty-broom
+<p align="center">
+  <img src="assets/img/logo.webp" alt="Logo">
+</p>
 
 Frees up disk space by clearing build artifacts from projects you haven't worked on in a long time: `target`, `node_modules`, `.venv`, `build`, `Pods`, and so on.
+
+<p align="center">
+  <img src="assets/img/usage.webp" alt="Logo">
+</p>
 
 The primary metric is how recently the project was modified. The age is calculated based on the modification time of **the project's own files**. Artifacts, `.git`, and system/service directories are excluded from this calculation. This ensures that rebuilding the project or running `git gc` won't make an abandoned project appear "fresh," whereas editing source code or running `git pull` will.
 
