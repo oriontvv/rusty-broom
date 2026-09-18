@@ -3,14 +3,14 @@
 [![Actions Status](https://github.com/oriontvv/rusty-broom/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/oriontvv/rusty-broom/actions/workflows/ci.yml) [![Coverage badge](https://raw.githubusercontent.com/oriontvv/rusty-broom/coverage/htmlcov/badges/flat.svg)](https://htmlpreview.github.io/?https://github.com/oriontvv/rusty-broom/coverage/htmlcov/index.html) [![dependency status](https://deps.rs/repo/github/oriontvv/rusty-broom/status.svg)](https://deps.rs/repo/github/oriontvv/rusty-broom) [![Crates.io](https://img.shields.io/crates/v/rusty-broom.svg)](https://crates.io/crates/rusty-broom)
 
 <p align="center">
-  <img src="assets/img/logo.webp" alt="Logo">
+  <img src="https://github.com/oriontvv/rusty-broom/blob/master/assets/img/logo.web" alt="Logo">
 </p>
 
 Освобождает диск от сборочного мусора в проектах, которыми вы давно не занимались:
 `target`, `node_modules`, `.venv`, `build`, `Pods` и так далее.
 
 <p align="center">
-  <img src="assets/img/usage.webp" alt="Logo">
+  <img src="https://github.com/oriontvv/rusty-broom/blob/master/assets/img/usage.webp" alt="Logo">
 </p>
 
 Основной критерий — как давно проект трогали. Возраст считается по времени
@@ -24,6 +24,7 @@
 `no-git`, и их артефакты не проверяются — это видно в отчёте и в интерфейсе.
 
 ## Установка
+* `cargo binstall rusty-broom` (Скачивание бинарника используя [cargo-binstall](https://github.com/cargo-bins/cargo-binstall#installation))
 * `cargo install rusty-broom`
 * или скачайте последний [билд](https://github.com/oriontvv/rusty-broom/releases)
 

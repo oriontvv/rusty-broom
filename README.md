@@ -3,13 +3,13 @@
 [![Actions Status](https://github.com/oriontvv/rusty-broom/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/oriontvv/rusty-broom/actions/workflows/ci.yml) [![Coverage badge](https://raw.githubusercontent.com/oriontvv/rusty-broom/coverage/htmlcov/badges/flat.svg)](https://htmlpreview.github.io/?https://github.com/oriontvv/rusty-broom/coverage/htmlcov/index.html) [![dependency status](https://deps.rs/repo/github/oriontvv/rusty-broom/status.svg)](https://deps.rs/repo/github/oriontvv/rusty-broom) [![Crates.io](https://img.shields.io/crates/v/rusty-broom.svg)](https://crates.io/crates/rusty-broom)
 
 <p align="center">
-  <img src="assets/img/logo.webp" alt="Logo">
+  <img src="https://github.com/oriontvv/rusty-broom/blob/master/assets/img/logo.webp" alt="Logo">
 </p>
 
 Frees up disk space by clearing build artifacts from projects you haven't worked on in a long time: `target`, `node_modules`, `.venv`, `build`, `Pods`, and so on.
 
 <p align="center">
-  <img src="assets/img/usage.webp" alt="Logo">
+  <img src="https://github.com/oriontvv/rusty-broom/blob/master/assets/img/usage.webp" alt="Logo">
 </p>
 
 The primary metric is how recently the project was modified. The age is calculated based on the modification time of **the project's own files**. Artifacts, `.git`, and system/service directories are excluded from this calculation. This ensures that rebuilding the project or running `git gc` won't make an abandoned project appear "fresh," whereas editing source code or running `git pull` will.
@@ -17,7 +17,8 @@ The primary metric is how recently the project was modified. The age is calculat
 The tool only deletes paths that Git itself considers ignored (`git check-ignore`). Committed `dist/` or `vendor/` directories will remain untouched, even if they are listed in the configuration file. Projects outside of a Git repository are labeled as `no-git`, and their artifacts are not verified—this is indicated in both the report and the user interface.
 
 ## Installation
-* `cargo install rusty-broom`
+* `cargo binstall rusty-broom` (install binary using [cargo-binstall](https://github.com/cargo-bins/cargo-binstall#installation))
+* `cargo install rusty-broom` (build from sources)
 * or download latest [build](https://github.com/oriontvv/rusty-broom/releases)
 
 ## Building

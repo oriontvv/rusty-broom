@@ -1,6 +1,6 @@
 [package]
 name = "rusty-broom"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2024"
 description = "Reclaim disk space from build artifacts of projects you stopped working on"
 license = "GPL-3.0-or-later"
@@ -25,5 +25,5 @@ pkg-url = "{ repo }/releases/download/{ version }/{ name }-linux-musl{ archive-s
 [package.metadata.binstall.overrides.x86_64-pc-windows-msvc]
 pkg-url = "{ repo }/releases/download/{ version }/{ name }-win{ archive-suffix }"
 
-[package.metadata.binstall.overrides.x86_64-apple-darwin]
+[package.metadata.binstall.overrides.aarch64-apple-darwin]
 pkg-url = "{ repo }/releases/download/{ version }/{ name }-mac{ archive-suffix }"
