@@ -5,6 +5,11 @@ edition = "2024"
 description = "Reclaim disk space from build artifacts of projects you stopped working on"
 license = "GPL-3.0-or-later"
 readme = "README.md"
+homepage = "https://github.com/oriontvv/rusty-broom/"
+repository = "https://github.com/oriontvv/rusty-broom/"
+keywords = ["tui", "cli", "cleaner", "disk", "usage"]
+categories = ["command-line-utilities"]
+
 
 [dependencies]
 anyhow = "1.0.104"
