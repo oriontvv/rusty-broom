@@ -18,6 +18,7 @@ The tool only deletes paths that Git itself considers ignored (`git check-ignore
 
 ## Installation
 * `cargo binstall rusty-broom` (install binary using [cargo-binstall](https://github.com/cargo-bins/cargo-binstall#installation))
+* `brew install oriontvv/tap/rusty-broom` (for macos)
 * `cargo install rusty-broom` (build from sources)
 * or download latest [build](https://github.com/oriontvv/rusty-broom/releases)
 
