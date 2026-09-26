@@ -123,7 +123,7 @@ jobs:
           SHA_LINUX="${{ steps.hashes.outputs.linux }}"
 
           cat > rusty-broom.rb <<EOF
-          class rusty-broom < Formula
+          class RustyBroom < Formula
             desc "CLI tool which can convert different formats"
             homepage "https://github.com/oriontvv/rusty-broom"
             version "${VERSION}"
